@@ -3,37 +3,54 @@ using Raven.Client.Documents.Conventions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace CollectionMapper.RavenDB.NetCore
 {
     public abstract class CollectionMapperRavenDB
     {
-        private readonly IList<CollectionRavenDB> Collections = new List<CollectionRavenDB>();
+        public IReadOnlyList<CollectionRavenDB> Collections => _collections.ToList();
+        private readonly IList<CollectionRavenDB> _collections = new List<CollectionRavenDB>();
 
-        public CollectionMapperRavenDB() { }
+        public string FindCollectionBy(Type type) => this._collections.Where(w => w.Type == type).SingleOrDefault()?.CollectionName ?? DocumentConventions.DefaultGetCollectionName(type);
 
-        public string FindCollection(Type type) => this.Collections.Where(w => w.Type == type).SingleOrDefault()?.CollectionName ?? DocumentConventions.DefaultGetCollectionName(type);
-
-        protected CollectionMapperRavenDB Map<T>(string collectionName)
+        public CollectionMapperRavenDB Map<T>(string collectionName)
         {
             var type = typeof(T);
+            Validate(type);
 
-            if (IsMappedByType(type))
-                throw new MappingAlreadyExistsException();
-
-            this.Collections.Add(new CollectionRavenDB(type, collectionName));
+            this._collections.Add(new CollectionRavenDB(type, collectionName));
 
             return this;
         }
-
-        protected CollectionMapperRavenDB Merge(CollectionMapperRavenDB anotherCollectionMapper)
+        public CollectionMapperRavenDB Map(string collectionName, params Type[] types)
         {
-            foreach (var collection in anotherCollectionMapper.Collections)
-                this.Collections.Add(collection);
+            foreach (var type in types)
+            {
+                Validate(type);
+                this._collections.Add(new CollectionRavenDB(type, collectionName));
+            }
 
             return this;
         }
 
-        private bool IsMappedByType(Type type) => this.Collections.Where(w => w.Type == type).Any();
+        public CollectionMapperRavenDB Merge(CollectionMapperRavenDB anotherCollectionMapper)
+        {
+            foreach (var coll in anotherCollectionMapper._collections)
+                this.Map(coll.CollectionName, coll.Type);
+
+            return this;
+        }
+
+        public bool IsMappedBy(Type type) => this._collections.Where(w => w.Type.Equals(type)).Any();
+
+        private void Validate(Type type)
+        {
+            if (type.GetTypeInfo().IsAbstract)
+                throw new CannotMapAbstractClassesException(type);
+
+            if (IsMappedBy(type))
+                throw new MappingAlreadyExistsException(type);
+        }
     }
 }

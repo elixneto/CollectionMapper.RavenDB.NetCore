@@ -4,6 +4,8 @@ namespace CollectionMapper.RavenDB.NetCore.Exceptions
 {
     public class MappingAlreadyExistsException : Exception
     {
-        public MappingAlreadyExistsException() : base("Mapping already exists") { }
+        public MappingAlreadyExistsException(Type type)
+            : base($"Mapping already exists for: '{type.Name}'")
+        { }
     }
 }

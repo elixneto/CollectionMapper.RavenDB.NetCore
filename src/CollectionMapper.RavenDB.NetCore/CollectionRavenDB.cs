@@ -2,7 +2,7 @@
 
 namespace CollectionMapper.RavenDB.NetCore
 {
-    internal class CollectionRavenDB
+    public class CollectionRavenDB
     {
         public readonly Type Type;
         public readonly string CollectionName;
