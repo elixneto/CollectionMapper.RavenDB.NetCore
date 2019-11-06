@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace CollectionMapper.RavenDB.NetCore
+namespace CollectionMapper.RavenDB.NetCore.Models
 {
-    public class CollectionRavenDB
+    public sealed class CollectionRavenDB
     {
         public readonly Type Type;
         public readonly string CollectionName;

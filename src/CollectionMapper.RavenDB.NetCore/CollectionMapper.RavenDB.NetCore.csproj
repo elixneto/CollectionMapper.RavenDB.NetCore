@@ -7,18 +7,18 @@
     <Product />
     <Description>Collection Mapper for RavenDB</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>2.0.1</Version>
+    <Version>2.0.2</Version>
     <PackageProjectUrl>https://github.com/elixneto/CollectionMapper.RavenDB.NetCore/wiki</PackageProjectUrl>
     <RepositoryUrl>https://github.com/elixneto/CollectionMapper.RavenDB.NetCore</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <PackageReleaseNotes>Added Icon</PackageReleaseNotes>
+    <PackageReleaseNotes>Property ignorer</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageIcon>logo.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="RavenDB.Client" Version="4.2.3" />
-    <None Include="logo.png" Pack="true" PackagePath="\"/>
+    <None Include="logo.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

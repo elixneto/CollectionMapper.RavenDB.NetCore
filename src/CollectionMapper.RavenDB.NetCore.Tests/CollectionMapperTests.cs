@@ -27,10 +27,10 @@ namespace CollectionMapper.RavenDB.NetCore.Tests
             var anotherMapper = new MyMapper().Map<Car>("Cars");
 
             _myMapper.Merge(anotherMapper);
-            var totalOfMappings = _myMapper.Collections.Count;
+            var totalOfMappings = _myMapper.GetCollections().Count;
 
             Assert.Equal(6, totalOfMappings);
-            Assert.Equal(1, anotherMapper.Collections.Count);
+            Assert.Equal(1, anotherMapper.GetCollections().Count);
         }
 
         [Theory]
