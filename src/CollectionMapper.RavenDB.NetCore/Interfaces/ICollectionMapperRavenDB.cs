@@ -12,10 +12,14 @@ namespace CollectionMapper.RavenDB.NetCore.Interfaces
         CollectionMapperRavenDB Map<T>(string collectionName);
         CollectionMapperRavenDB Map(string collectionName, params Type[] types);
         CollectionMapperRavenDB Merge(ICollectionMapperRavenDB anotherCollectionMapper, bool mergeIgnorerContracts = true);
-        void IgnoreProperties(string[] properties);
 
         IReadOnlyList<CollectionRavenDB> GetCollections();
+
+        void IgnoreProperties(string[] properties);
         string[] GetIgnoredProperties();
-        IContractResolver GetPropertyIgnorerContract();
+        void IncludeNonPublicProperties();
+        void NotIncludeNonPublicProperties();
+
+        IContractResolver GetPropertiesContract();
     }
 }
