@@ -14,26 +14,23 @@ namespace CollectionMapper.RavenDB.NetCore
     {
         private readonly IList<CollectionRavenDB> _collections = new List<CollectionRavenDB>();
 
-        private readonly PropertyIgnorerContract _propertyIgnorer = new PropertyIgnorerContract();
+        private readonly PropertiesContract _propertyIgnorer = new PropertiesContract();
 
         public string FindCollectionBy(Type type) => this._collections.Where(w => w.Type == type).SingleOrDefault()?.CollectionName ?? DocumentConventions.DefaultGetCollectionName(type);
 
-        public CollectionMapperRavenDB Map<T>(string collectionName)
+        private CollectionMapperRavenDB PrivateMap(string collectionName, Type type)
         {
-            var type = typeof(T);
             Validate(type);
-
-            this._collections.Add(new CollectionRavenDB(type, collectionName));
-
+            _collections.Add(new CollectionRavenDB(type, collectionName));
             return this;
         }
+
+        public CollectionMapperRavenDB Map<T>(string collectionName) => this.PrivateMap(collectionName, typeof(T));
+        
         public CollectionMapperRavenDB Map(string collectionName, params Type[] types)
         {
             foreach (var type in types)
-            {
-                Validate(type);
-                this._collections.Add(new CollectionRavenDB(type, collectionName));
-            }
+                this.PrivateMap(collectionName, type);
 
             return this;
         }
@@ -41,7 +38,7 @@ namespace CollectionMapper.RavenDB.NetCore
         public CollectionMapperRavenDB Merge(ICollectionMapperRavenDB anotherCollectionMapper, bool mergeIgnorerContracts = true)
         {
             foreach (var coll in anotherCollectionMapper.GetCollections())
-                this.Map(coll.CollectionName, coll.Type);
+                this.PrivateMap(coll.CollectionName, coll.Type);
 
             if (mergeIgnorerContracts)
                 this.IgnoreProperties(anotherCollectionMapper.GetIgnoredProperties());
@@ -55,7 +52,7 @@ namespace CollectionMapper.RavenDB.NetCore
 
         public IReadOnlyList<CollectionRavenDB> GetCollections() => _collections.ToList();
 
-        public IContractResolver GetPropertyIgnorerContract() => _propertyIgnorer;
+        public IContractResolver GetPropertiesContract() => _propertyIgnorer;
 
         public string[] GetIgnoredProperties() => _propertyIgnorer.GetIgnoredProperties().ToArray();
 
@@ -67,5 +64,8 @@ namespace CollectionMapper.RavenDB.NetCore
             if (IsMappedBy(type))
                 throw new MappingAlreadyExistsException(type);
         }
+
+        public void IncludeNonPublicProperties() => _propertyIgnorer.IncludeNonPublicProperties();
+        public void NotIncludeNonPublicProperties() => _propertyIgnorer.NotIncludeNonPublicProperties();
     }
 }

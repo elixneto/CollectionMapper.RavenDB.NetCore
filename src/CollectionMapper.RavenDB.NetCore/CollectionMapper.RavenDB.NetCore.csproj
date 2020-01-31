@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://github.com/elixneto/CollectionMapper.RavenDB.NetCore/wiki</PackageProjectUrl>
     <RepositoryUrl>https://github.com/elixneto/CollectionMapper.RavenDB.NetCore</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <PackageReleaseNotes>Property ignorer</PackageReleaseNotes>
+    <PackageReleaseNotes>Including private properties to mapping</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageIcon>logo.png</PackageIcon>
   </PropertyGroup>

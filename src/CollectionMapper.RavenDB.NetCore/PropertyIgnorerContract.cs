@@ -5,11 +5,12 @@ using System.Reflection;
 
 namespace CollectionMapper.RavenDB.NetCore
 {
-    public class PropertyIgnorerContract : DefaultContractResolver
+    public class PropertiesContract : DefaultContractResolver
     {
         private readonly List<string> _ignoredProperties = new List<string>();
+        private bool _includeNonPublicProperties = false;
 
-        public PropertyIgnorerContract() { }
+        public PropertiesContract() { }
 
         public void AddProperties(string[] properties)
         {
@@ -17,10 +18,18 @@ namespace CollectionMapper.RavenDB.NetCore
                 this._ignoredProperties.Add(p);
         }
 
+        public void IncludeNonPublicProperties() => _includeNonPublicProperties = true;
+        public void NotIncludeNonPublicProperties() => _includeNonPublicProperties = false;
 
         protected override List<MemberInfo> GetSerializableMembers(Type objectType)
         {
-            var members = base.GetSerializableMembers(objectType);
+            var members = new List<MemberInfo>();
+
+            if (_includeNonPublicProperties)
+                members.AddRange(objectType.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance));
+            else
+                members.AddRange(objectType.GetProperties(BindingFlags.Public | BindingFlags.Instance));
+
             foreach (var prop in this._ignoredProperties)
                 members.RemoveAll(x => x.Name == prop);
 
