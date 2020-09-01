@@ -16,6 +16,7 @@ public class MyMapper : CollectionMapperRavenDB
         Map<Account>("MyUniqueAccounts");
         Map<Bank>("SuperSpecialBanks");
         Map<User>("xUsersx");
+        Map("Fruits", typeof(Apple), typeof(Banana), typeof(Strawberry));
         ...
         ...
     }
