@@ -2,12 +2,13 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.0;netstandard2.0</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Élix Neto</Authors>
     <Company />
     <Product />
     <Description>Collection Mapper for RavenDB</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>2.2.0</Version>
+    <Version>5.0.0</Version>
     <PackageProjectUrl>https://github.com/elixneto/CollectionMapper.RavenDB.NetCore/wiki</PackageProjectUrl>
     <RepositoryUrl>https://github.com/elixneto/CollectionMapper.RavenDB.NetCore</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
@@ -17,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RavenDB.Client" Version="4.2.3" />
+    <PackageReference Include="RavenDB.Client" Version="5.1.2" />
     <None Include="logo.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
