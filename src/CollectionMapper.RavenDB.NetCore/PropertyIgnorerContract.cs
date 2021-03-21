@@ -12,7 +12,7 @@ namespace CollectionMapper.RavenDB.NetCore
 
         public PropertiesContract() { }
 
-        public void AddProperties(string[] properties)
+        public void AddIgnoredProperties(string[] properties)
         {
             foreach (var p in properties)
                 this._ignoredProperties.Add(p);
@@ -26,9 +26,9 @@ namespace CollectionMapper.RavenDB.NetCore
             var members = new List<MemberInfo>();
 
             if (_includeNonPublicProperties)
-                members.AddRange(objectType.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance));
+                members.AddRange(objectType.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic));
             else
-                members.AddRange(objectType.GetProperties(BindingFlags.Public | BindingFlags.Instance));
+                members.AddRange(objectType.GetProperties(BindingFlags.Instance | BindingFlags.Public));
 
             foreach (var prop in this._ignoredProperties)
                 members.RemoveAll(x => x.Name == prop);

@@ -14,7 +14,7 @@ namespace CollectionMapper.RavenDB.NetCore
     {
         private readonly IList<CollectionRavenDB> _collections = new List<CollectionRavenDB>();
 
-        private readonly PropertiesContract _propertyIgnorer = new PropertiesContract();
+        private readonly PropertiesContract _contractProperties = new PropertiesContract();
 
         public string FindCollectionBy(Type type) => this._collections.Where(w => w.Type == type).SingleOrDefault()?.CollectionName ?? DocumentConventions.DefaultGetCollectionName(type);
 
@@ -48,13 +48,13 @@ namespace CollectionMapper.RavenDB.NetCore
 
         public bool IsMappedBy(Type type) => this._collections.Where(w => w.Type.Equals(type)).Any();
 
-        public void IgnoreProperties(string[] properties) => _propertyIgnorer.AddProperties(properties);
+        public void IgnoreProperties(string[] properties) => _contractProperties.AddIgnoredProperties(properties);
 
         public IReadOnlyList<CollectionRavenDB> GetCollections() => _collections.ToList();
 
-        public IContractResolver GetPropertiesContract() => _propertyIgnorer;
+        public IContractResolver GetPropertiesContract() => _contractProperties;
 
-        public string[] GetIgnoredProperties() => _propertyIgnorer.GetIgnoredProperties().ToArray();
+        public string[] GetIgnoredProperties() => _contractProperties.GetIgnoredProperties().ToArray();
 
         private void Validate(Type type)
         {
@@ -65,7 +65,7 @@ namespace CollectionMapper.RavenDB.NetCore
                 throw new MappingAlreadyExistsException(type);
         }
 
-        public void IncludeNonPublicProperties() => _propertyIgnorer.IncludeNonPublicProperties();
-        public void NotIncludeNonPublicProperties() => _propertyIgnorer.NotIncludeNonPublicProperties();
+        public void IncludeNonPublicProperties() => _contractProperties.IncludeNonPublicProperties();
+        public void NotIncludeNonPublicProperties() => _contractProperties.NotIncludeNonPublicProperties();
     }
 }
