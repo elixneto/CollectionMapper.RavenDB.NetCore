@@ -9,9 +9,9 @@ https://github.com/elixneto/CollectionMapper.RavenDB.NetCore/wiki
 
 ## Easy to use
 ```csharp
-public class MyMapper : RavenDBCollectionMapper
+public class MyCustomMapper : RavenDBCollectionMapper
 {
-    public MyMapper()
+    public MyCustomMapper()
     {
         Map<Account>("MyUniqueAccounts");
         Map<Bank>("SuperSpecialBanks");
@@ -22,23 +22,27 @@ public class MyMapper : RavenDBCollectionMapper
     }
 }
 
-public class RavenDBContextExample
+public class RavenDBDocumentStoreHolderExample
 {
-    private readonly MyMapper myMapper = new MyMapper();
+    private readonly MyCustomMapper myCustomMapper = new MyCustomMapper();
 
-    public RavenDBContextExample()
+    private static Lazy<IDocumentStore> store = new Lazy<IDocumentStore>(CreateStore);
+    public static IDocumentStore Store => store.Value;
+    private static IDocumentStore CreateStore()
     {
-        using(IDocumentStore store = new DocumentStore
+        IDocumentStore store = new DocumentStore
         {
-                Urls = new[] { "your_RavenDB_server_URL" },
+                Urls = new[] { "http://your_RavenDB_cluster_node" },
                 Database = "your_RavenDB_database_name",
                 
                 /* Here you set the collection mapper */
                 Conventions = {
-                    FindCollectionName = (type) => myMapper.FindCollectionBy(type)
+                    FindCollectionName = (type) => myCustomMapper.FindCollectionBy(type)
                 }
 
-        }.Initialize())
+        }.Initialize();
+
+        return store;
     }
 }
 ```
