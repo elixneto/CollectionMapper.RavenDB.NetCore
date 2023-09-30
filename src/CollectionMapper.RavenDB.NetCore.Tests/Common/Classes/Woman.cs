@@ -1,4 +1,4 @@
-﻿namespace RavenDB.CollectionMapper.Tests.Common.Classes
+﻿namespace CollectionMapper.RavenDB.NetCore.Tests.Common.Classes
 {
     class Woman : Person
     {

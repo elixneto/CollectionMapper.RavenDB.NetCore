@@ -1,4 +1,4 @@
-﻿namespace RavenDB.CollectionMapper.Tests.Common
+﻿namespace CollectionMapper.RavenDB.NetCore.Tests.Common
 {
     public class MyMapper : RavenDBCollectionMapper
     {

@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace RavenDB.CollectionMapper
+namespace CollectionMapper.RavenDB.NetCore
 {
     public class PropertiesContract : DefaultContractResolver
     {
-        private readonly List<string> _ignoredProperties = new();
+        private readonly List<string> _ignoredProperties = new List<string>();
         private bool _includeNonPublicProperties = false;
 
         public PropertiesContract() { }

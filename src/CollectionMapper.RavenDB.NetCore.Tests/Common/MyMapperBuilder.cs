@@ -1,6 +1,6 @@
-﻿using RavenDB.CollectionMapper.Tests.Common.Classes;
+﻿using CollectionMapper.RavenDB.NetCore.Tests.Common.Classes;
 
-namespace RavenDB.CollectionMapper.Tests.Common
+namespace CollectionMapper.RavenDB.NetCore.Tests.Common
 {
     public class MyMapperBuilder
     {

@@ -1,8 +1,8 @@
-﻿using RavenDB.CollectionMapper.Exceptions;
+﻿using CollectionMapper.RavenDB.NetCore.Exceptions;
 using System;
 using System.Reflection;
 
-namespace RavenDB.CollectionMapper.Models
+namespace CollectionMapper.RavenDB.NetCore.Models
 {
     public sealed class CollectionDefinitionModel
     {

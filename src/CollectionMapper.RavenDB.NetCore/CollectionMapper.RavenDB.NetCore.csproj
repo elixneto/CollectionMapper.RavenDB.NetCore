@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6;net7</TargetFrameworks>
+    <TargetFrameworks>net7;net6;netcoreapp3.1;netstandard2.1;</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Élix Neto</Authors>
     <Company />
     <Product />
     <Description>Collection Mapper for RavenDB</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>5.4.1</Version>
-    <PackageProjectUrl>https://github.com/elixneto/RavenDB.CollectionMapper/wiki</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/elixneto/RavenDB.CollectionMapper</RepositoryUrl>
+    <Version>5.4.100</Version>
+    <PackageProjectUrl>https://github.com/elixneto/CollectionMapper.RavenDB.NetCore/wiki</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/elixneto/CollectionMapper.RavenDB.NetCore</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageReleaseNotes>Including private properties to mapping</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>

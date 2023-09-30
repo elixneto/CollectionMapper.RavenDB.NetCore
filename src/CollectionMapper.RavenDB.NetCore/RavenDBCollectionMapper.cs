@@ -1,17 +1,17 @@
 ﻿using Newtonsoft.Json.Serialization;
-using RavenDB.CollectionMapper.Exceptions;
-using RavenDB.CollectionMapper.Interfaces;
-using RavenDB.CollectionMapper.Models;
+using CollectionMapper.RavenDB.NetCore.Exceptions;
+using CollectionMapper.RavenDB.NetCore.Interfaces;
+using CollectionMapper.RavenDB.NetCore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RavenDB.CollectionMapper
+namespace CollectionMapper.RavenDB.NetCore
 {
     public abstract class RavenDBCollectionMapper : IRavenDBCollectionMapper
     {
-        private readonly List<CollectionDefinitionModel> _mappedCollections = new ();
-        private readonly PropertiesContract _contractProperties = new();
+        private readonly List<CollectionDefinitionModel> _mappedCollections = new List<CollectionDefinitionModel>();
+        private readonly PropertiesContract _contractProperties = new PropertiesContract();
 
         public string FindCollectionBy(Type type) => this._mappedCollections.SingleOrDefault(w => w.Type == type)?.CollectionName;
 

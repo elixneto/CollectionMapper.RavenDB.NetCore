@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RavenDB.CollectionMapper\RavenDB.CollectionMapper.csproj" />
+    <ProjectReference Include="..\CollectionMapper.RavenDB.NetCore\CollectionMapper.RavenDB.NetCore.csproj" />
   </ItemGroup>
 
 </Project>

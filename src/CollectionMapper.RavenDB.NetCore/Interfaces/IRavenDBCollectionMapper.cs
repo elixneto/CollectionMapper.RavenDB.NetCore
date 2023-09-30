@@ -1,9 +1,9 @@
-﻿using RavenDB.CollectionMapper.Models;
+﻿using CollectionMapper.RavenDB.NetCore.Models;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
-namespace RavenDB.CollectionMapper.Interfaces
+namespace CollectionMapper.RavenDB.NetCore.Interfaces
 {
     public interface IRavenDBCollectionMapper
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RavenDB.CollectionMapper.Exceptions
+namespace CollectionMapper.RavenDB.NetCore.Exceptions
 {
     public class MappingAlreadyExistsException : Exception
     {

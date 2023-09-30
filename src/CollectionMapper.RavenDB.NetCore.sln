@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RavenDB.CollectionMapper", "RavenDB.CollectionMapper\RavenDB.CollectionMapper.csproj", "{D9F8FC00-C65A-4579-A886-38975E0F749D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollectionMapper.RavenDB.NetCore", "CollectionMapper.RavenDB.NetCore\CollectionMapper.RavenDB.NetCore.csproj", "{D9F8FC00-C65A-4579-A886-38975E0F749D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RavenDB.CollectionMapper.Tests", "RavenDB.CollectionMapper.Tests\RavenDB.CollectionMapper.Tests.csproj", "{E9F1066B-CE00-4ACD-82CA-DA2692FF0600}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollectionMapper.RavenDB.NetCore.Tests", "CollectionMapper.RavenDB.NetCore.Tests\CollectionMapper.RavenDB.NetCore.Tests.csproj", "{E9F1066B-CE00-4ACD-82CA-DA2692FF0600}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D9F8FC00-C65A-4579-A886-38975E0F749D} = {D9F8FC00-C65A-4579-A886-38975E0F749D}
 	EndProjectSection

@@ -1,9 +1,9 @@
-using RavenDB.CollectionMapper.Exceptions;
-using RavenDB.CollectionMapper.Tests.Common;
-using RavenDB.CollectionMapper.Tests.Common.Classes;
+using CollectionMapper.RavenDB.NetCore.Exceptions;
+using CollectionMapper.RavenDB.NetCore.Tests.Common;
+using CollectionMapper.RavenDB.NetCore.Tests.Common.Classes;
 using Xunit;
 
-namespace RavenDB.CollectionMapper.Tests
+namespace CollectionMapper.RavenDB.NetCore.Tests
 {
     public class ExceptionTests
     {

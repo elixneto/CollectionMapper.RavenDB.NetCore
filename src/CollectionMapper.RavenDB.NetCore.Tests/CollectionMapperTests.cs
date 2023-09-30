@@ -1,9 +1,9 @@
-﻿using RavenDB.CollectionMapper.Tests.Common;
-using RavenDB.CollectionMapper.Tests.Common.Classes;
+﻿using CollectionMapper.RavenDB.NetCore.Tests.Common;
+using CollectionMapper.RavenDB.NetCore.Tests.Common.Classes;
 using System;
 using Xunit;
 
-namespace RavenDB.CollectionMapper.Tests
+namespace CollectionMapper.RavenDB.NetCore.Tests
 {
     public class CollectionMapperTests
     {
@@ -14,7 +14,7 @@ namespace RavenDB.CollectionMapper.Tests
         [InlineData("People", typeof(Woman))]
         [InlineData("Fruits", typeof(Apple))]
         [InlineData("Fruits", typeof(Banana))]
-        public void Should_return_the_right_collection_name_by_type(string expected, Type type)
+        public void Should_ReturnTheRightCollectionNameByType(string expected, Type type)
         {
             var actualCollectionName = _myMapper.FindCollectionBy(type);
 
@@ -22,7 +22,7 @@ namespace RavenDB.CollectionMapper.Tests
         }
 
         [Fact]
-        public void Should_merge_two_different_mappers()
+        public void Should_MergeTwoDifferentMappers()
         {
             var anotherMapper = new MyMapper().Map<Car>("Cars");
 
@@ -38,7 +38,7 @@ namespace RavenDB.CollectionMapper.Tests
         [InlineData(typeof(Banana))]
         [InlineData(typeof(Man))]
         [InlineData(typeof(Woman))]
-        public void Should_return_true_when_the_class_is_mapped(Type type)
+        public void Should_ReturnTrue_WhenTheClassHasMapping(Type type)
         {
             var isMapped = _myMapper.HasMappingFor(type);
 
@@ -48,7 +48,7 @@ namespace RavenDB.CollectionMapper.Tests
         [Theory]
         [InlineData(typeof(Car))]
         [InlineData(typeof(Tractor))]
-        public void Should_return_false_when_the_class_is_not_mapped(Type type)
+        public void Should_ReturnTrue_WhenTheClassDoesNotHaveMapping(Type type)
         {
             var isMapped = _myMapper.HasMappingFor(type);
 
@@ -56,15 +56,18 @@ namespace RavenDB.CollectionMapper.Tests
         }
 
         [Fact]
-        public void Should_not_throw_exceptions_with_fluent_mapping()
+        public void Should_NotThrowExceptions_WithFluentMapping()
         {
             var newMapper = new MyMapper();
             newMapper.Map<Banana>("Fruit").Map<Apple>("Fruit");
             newMapper.Map<Grape>("Fruit");
+
+            Assert.True(newMapper.HasMappingFor<Banana>());
+            Assert.False(newMapper.HasMappingFor<Car>());
         }
 
         [Fact]
-        public void Should_not_throw_exceptions_with_param_vector_mapping()
+        public void Should_NotThrowExceptions_WithParamVectorMapping()
         {
             var newMapper = new MyMapper();
             newMapper.Map("Fruit", typeof(Banana), typeof(Apple));
