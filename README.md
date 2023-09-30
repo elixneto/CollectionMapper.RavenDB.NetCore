@@ -15,7 +15,7 @@ public class MyMapper : RavenDBCollectionMapper
     {
         Map<Account>("MyUniqueAccounts");
         Map<Bank>("SuperSpecialBanks");
-        Map<User>("xUsersx");
+        Map<User>("USER");
         Map("Fruits", typeof(Apple), typeof(Banana), typeof(Strawberry));
         ...
         ...
