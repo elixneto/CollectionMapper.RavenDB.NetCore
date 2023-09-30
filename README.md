@@ -30,7 +30,7 @@ public class RavenDBDocumentStoreHolderExample
     public static IDocumentStore Store => store.Value;
     private static IDocumentStore CreateStore()
     {
-        /* you can ignore private properties from you entities classes */
+        /* you can ignore private properties of your entities classes */
         myCustomMapper.IncludeNonPublicProperties(false);
 
         IDocumentStore store = new DocumentStore
