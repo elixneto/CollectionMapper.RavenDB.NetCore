@@ -1,7 +1,7 @@
 <image width="150px" src="https://github.com/elixneto/CollectionMapper.RavenDB.NetCore/blob/master/src/CollectionMapper.RavenDB.NetCore/logo.png" />
 
 # CollectionMapper.RavenDB.NetCore
-An easy way to map your domain/entities classes to RavenDB collections for .NET applications
+An easy way to map your entities classes to RavenDB collections for .NET applications
 
 ## Wiki
 Full Documentation: <br>
