@@ -56,7 +56,7 @@ namespace CollectionMapper.RavenDB.NetCore
 
         public string[] GetIgnoredProperties() => _contractProperties.GetIgnoredProperties().ToArray();
 
-        public void IncludeNonPublicProperties(bool include = false)
+        public void IncludeNonPublicProperties(bool include = true)
         {
             if (include)
             {

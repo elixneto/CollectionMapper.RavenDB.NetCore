@@ -20,6 +20,6 @@ namespace CollectionMapper.RavenDB.NetCore.Interfaces
         void IgnoreProperties(string[] properties);
         IContractResolver GetPropertiesContract();
         string[] GetIgnoredProperties();
-        void IncludeNonPublicProperties(bool include = false);
+        void IncludeNonPublicProperties(bool include = true);
     }
 }
