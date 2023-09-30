@@ -25,6 +25,8 @@ public class MyCustomMapper : RavenDBCollectionMapper
 public class RavenDBDocumentStoreHolderExample
 {
     private readonly MyCustomMapper myCustomMapper = new MyCustomMapper();
+    /* you can ignore private properties from you entities classes */
+    myCustomMapper.IncludeNonPublicProperties(false);
 
     private static Lazy<IDocumentStore> store = new Lazy<IDocumentStore>(CreateStore);
     public static IDocumentStore Store => store.Value;
@@ -35,9 +37,15 @@ public class RavenDBDocumentStoreHolderExample
                 Urls = new[] { "http://your_RavenDB_cluster_node" },
                 Database = "your_RavenDB_database_name",
                 
-                /* Here you set the collection mapper */
                 Conventions = {
-                    FindCollectionName = (type) => myCustomMapper.FindCollectionBy(type)
+                    /* Here you set the collection mapper */
+                    FindCollectionName = (type) => myCustomMapper.FindCollectionBy(type),
+
+                    /* Here you can use the contract resolver to ignore the private properties */
+                    Serialization = new NewtonsoftJsonSerializationConventions
+                    {
+                        JsonContractResolver  = myCustomMapper.GetPropertiesContract()
+                    }
                 }
 
         }.Initialize();
