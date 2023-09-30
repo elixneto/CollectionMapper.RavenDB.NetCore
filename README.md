@@ -9,7 +9,7 @@ https://github.com/elixneto/CollectionMapper.RavenDB.NetCore/wiki
 
 ## Easy to use
 ```csharp
-public class MyMapper : CollectionMapperRavenDB
+public class MyMapper : RavenDBCollectionMapper
 {
     public MyMapper()
     {
