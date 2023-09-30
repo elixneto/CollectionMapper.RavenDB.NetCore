@@ -25,13 +25,14 @@ public class MyCustomMapper : RavenDBCollectionMapper
 public class RavenDBDocumentStoreHolderExample
 {
     private readonly MyCustomMapper myCustomMapper = new MyCustomMapper();
-    /* you can ignore private properties from you entities classes */
-    myCustomMapper.IncludeNonPublicProperties(false);
 
     private static Lazy<IDocumentStore> store = new Lazy<IDocumentStore>(CreateStore);
     public static IDocumentStore Store => store.Value;
     private static IDocumentStore CreateStore()
     {
+        /* you can ignore private properties from you entities classes */
+        myCustomMapper.IncludeNonPublicProperties(false);
+
         IDocumentStore store = new DocumentStore
         {
                 Urls = new[] { "http://your_RavenDB_cluster_node" },
