@@ -1,4 +1,4 @@
-﻿namespace CollectionMapper.RavenDB.NetCore.Tests.Common.Classes
+﻿namespace RavenDB.CollectionMapper.Tests.Common.Classes
 {
     class Car : Vehicle
     {

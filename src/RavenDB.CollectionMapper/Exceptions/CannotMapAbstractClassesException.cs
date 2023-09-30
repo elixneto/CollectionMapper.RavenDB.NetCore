@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CollectionMapper.RavenDB.NetCore.Exceptions
+namespace RavenDB.CollectionMapper.Exceptions
 {
     public class CannotMapAbstractClassesException : Exception
     {

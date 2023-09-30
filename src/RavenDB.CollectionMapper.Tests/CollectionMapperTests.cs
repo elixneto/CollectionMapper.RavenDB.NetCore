@@ -1,9 +1,9 @@
-﻿using CollectionMapper.RavenDB.NetCore.Tests.Common;
-using CollectionMapper.RavenDB.NetCore.Tests.Common.Classes;
+﻿using RavenDB.CollectionMapper.Tests.Common;
+using RavenDB.CollectionMapper.Tests.Common.Classes;
 using System;
 using Xunit;
 
-namespace CollectionMapper.RavenDB.NetCore.Tests
+namespace RavenDB.CollectionMapper.Tests
 {
     public class CollectionMapperTests
     {
@@ -27,10 +27,10 @@ namespace CollectionMapper.RavenDB.NetCore.Tests
             var anotherMapper = new MyMapper().Map<Car>("Cars");
 
             _myMapper.Merge(anotherMapper);
-            var totalOfMappings = _myMapper.GetCollections().Count;
+            var totalOfMappings = _myMapper.GetMappedCollections().Count;
 
             Assert.Equal(6, totalOfMappings);
-            Assert.Equal(1, anotherMapper.GetCollections().Count);
+            Assert.Equal(1, anotherMapper.GetMappedCollections().Count);
         }
 
         [Theory]
@@ -40,7 +40,7 @@ namespace CollectionMapper.RavenDB.NetCore.Tests
         [InlineData(typeof(Woman))]
         public void Should_return_true_when_the_class_is_mapped(Type type)
         {
-            var isMapped = _myMapper.IsMappedBy(type);
+            var isMapped = _myMapper.HasMappingFor(type);
 
             Assert.True(isMapped);
         }
@@ -50,7 +50,7 @@ namespace CollectionMapper.RavenDB.NetCore.Tests
         [InlineData(typeof(Tractor))]
         public void Should_return_false_when_the_class_is_not_mapped(Type type)
         {
-            var isMapped = _myMapper.IsMappedBy(type);
+            var isMapped = _myMapper.HasMappingFor(type);
 
             Assert.False(isMapped);
         }
@@ -69,6 +69,9 @@ namespace CollectionMapper.RavenDB.NetCore.Tests
             var newMapper = new MyMapper();
             newMapper.Map("Fruit", typeof(Banana), typeof(Apple));
             newMapper.Map("Fruit", typeof(Grape));
+
+            Assert.True(newMapper.HasMappingFor<Banana>());
+            Assert.False(newMapper.HasMappingFor<Car>());
         }
     }
 }
