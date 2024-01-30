@@ -11,7 +11,7 @@ myCustomMapper.IncludeNonPublicProperties(false);
 
 IDocumentStore store = new DocumentStore()
 {
-    Urls = new[] { "http://localhost:8080" },
+    Urls = ["http://localhost:8080"],
     Database = "DB_1",
     Conventions = {
         FindCollectionName = (type) => myCustomMapper.FindCollectionBy(type),
