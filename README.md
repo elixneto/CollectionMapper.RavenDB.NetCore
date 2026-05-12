@@ -1,6 +1,7 @@
-![Sonar Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=elixneto_CollectionMapper.RavenDB.NetCore&metric=alert_status)
-![Sonar Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=elixneto_CollectionMapper.RavenDB.NetCore&metric=vulnerabilities)
-![Sonar Coverage](https://sonarcloud.io/api/project_badges/measure?project=elixneto_CollectionMapper.RavenDB.NetCore&metric=coverage)
+[![NuGet Version](https://img.shields.io/nuget/v/CollectionMapper.RavenDB.NetCore.svg?style=flat-square)](https://www.nuget.org/packages/CollectionMapper.RavenDB.NetCore)
+[![Sonar Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=elixneto_CollectionMapper.RavenDB.NetCore&metric=alert_status)](https://sonarcloud.io/summary/overall?id=elixneto_CollectionMapper.RavenDB.NetCore&branch=master)
+[![Sonar Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=elixneto_CollectionMapper.RavenDB.NetCore&metric=vulnerabilities)](https://sonarcloud.io/summary/overall?id=elixneto_CollectionMapper.RavenDB.NetCore&branch=master)
+[![Sonar Coverage](https://sonarcloud.io/api/project_badges/measure?project=elixneto_CollectionMapper.RavenDB.NetCore&metric=coverage)](https://sonarcloud.io/summary/overall?id=elixneto_CollectionMapper.RavenDB.NetCore&branch=master)
 
 # CollectionMapper.RavenDB.NetCore
 <image width="160px" src="https://github.com/elixneto/CollectionMapper.RavenDB.NetCore/blob/master/src/CollectionMapper.RavenDB/logo.png" />
