@@ -9,14 +9,14 @@ internal static class BrokenAssemblyHelper
     public static Assembly Create()
     {
         var tempDir = Path.Combine(Path.GetTempPath(), "RavenDBMapperTests_" + Guid.NewGuid().ToString("N"));
-        // Diretórios separados: o contexto padrão só sonda o diretório do assembly carregado,
-        // portanto não encontrará o fantasma quando tentar resolver PhantomBase.
+        // Separate directories: the default context only probes the loaded assembly's directory,
+        // so it will not find the phantom when trying to resolve PhantomBase.
         var phantomDir = Path.Combine(tempDir, "phantom");
         var brokenDir = Path.Combine(tempDir, "broken");
         Directory.CreateDirectory(phantomDir);
         Directory.CreateDirectory(brokenDir);
 
-        // Passo 1: cria e salva o assembly "fantasma" em phantomDir
+        // Step 1: create and save the phantom assembly to phantomDir
         var phantomName = new AssemblyName("PhantomDep_" + Guid.NewGuid().ToString("N"));
         var phantomBuilder = new PersistedAssemblyBuilder(phantomName, typeof(object).Assembly);
         var phantomMod = phantomBuilder.DefineDynamicModule("PhantomModule");
@@ -25,13 +25,13 @@ internal static class BrokenAssemblyHelper
         var phantomPath = Path.Combine(phantomDir, phantomName.Name + ".dll");
         phantomBuilder.Save(phantomPath);
 
-        // Passo 2: carrega o fantasma apenas num AssemblyLoadContext coletável —
-        // o contexto padrão nunca o recebe, então não poderá resolvê-lo depois.
+        // Step 2: load the phantom only into a collectible AssemblyLoadContext —
+        // the default context never receives it, so it cannot resolve it later.
         var collectibleCtx = new AssemblyLoadContext("phantom-ctx", isCollectible: true);
         var phantomAssembly = collectibleCtx.LoadFromAssemblyPath(phantomPath);
         var phantomBaseType = phantomAssembly.GetType("PhantomBase")!;
 
-        // Passo 3: cria o assembly "quebrado" (BrokenType : PhantomBase) em brokenDir
+        // Step 3: create the broken assembly (BrokenType : PhantomBase) in brokenDir
         var testName = new AssemblyName("BrokenAssembly_" + Guid.NewGuid().ToString("N"));
         var testBuilder = new PersistedAssemblyBuilder(testName, typeof(object).Assembly);
         var testMod = testBuilder.DefineDynamicModule("TestModule");
@@ -41,9 +41,9 @@ internal static class BrokenAssemblyHelper
         var testPath = Path.Combine(brokenDir, testName.Name + ".dll");
         testBuilder.Save(testPath);
 
-        // Passo 4: carrega o assembly "quebrado" no contexto padrão.
-        // GetTypes() lançará ReflectionTypeLoadException porque o contexto padrão
-        // não encontra PhantomBase: ela está em phantomDir, não em brokenDir.
+        // Step 4: load the broken assembly into the default context.
+        // GetTypes() will throw ReflectionTypeLoadException because the default context
+        // cannot find PhantomBase: it lives in phantomDir, not in brokenDir.
         return Assembly.LoadFrom(testPath);
     }
 }
