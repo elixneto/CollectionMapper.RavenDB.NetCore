@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        
+        <!-- Package metadata -->
+        <Version>7.0.0</Version>
+        <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+        <PackageId>CollectionMapper.RavenDB.NetCore</PackageId>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Authors>Élix Neto</Authors>
+        <Company />
+        <Product />
+        <Description>Collection Mapper for RavenDB</Description>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/elixneto/CollectionMapper.RavenDB.NetCore</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/elixneto/CollectionMapper.RavenDB.NetCore</RepositoryUrl>
+        <RepositoryType>GitHub</RepositoryType>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <PackageIcon>logo.png</PackageIcon>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="RavenDB.Client" Version="7.*"/>
+        <None Include="logo.png" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Analyzer runs during compilation for all consumers of this library -->
+        <ProjectReference Include="..\CollectionMapper.RavenDB.Analyzers\CollectionMapper.RavenDB.Analyzers.csproj"
+                          OutputItemType="Analyzer"
+                          ReferenceOutputAssembly="false"/>
+    </ItemGroup>
+
+</Project>
