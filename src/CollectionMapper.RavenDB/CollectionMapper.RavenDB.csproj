@@ -9,7 +9,7 @@
         <Version>7.0.0</Version>
         <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
         <PackageId>CollectionMapper.RavenDB.NetCore</PackageId>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
         <Authors>Élix Neto</Authors>
         <Company />
         <Product />
@@ -23,7 +23,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="RavenDB.Client" Version="7.*"/>
+        <PackageReference Include="RavenDB.Client" Version="[7.0.0, 8.0.0)"/>
         <None Include="logo.png" Pack="true" PackagePath="\" />
     </ItemGroup>
 
