@@ -83,6 +83,34 @@ public class RavenCollectionAssignedFromAnalyzerTests
         Assert.Empty(diagnostics);
     }
 
+    [Fact]
+    public async Task AttributeWithNullClass_NoDiagnostic()
+    {
+        // No stub — SomeUnknownAttribute is unknown to Roslyn → attr.AttributeClass is ErrorType
+        var source = """
+            [SomeUnknownAttribute]
+            public class Apple { }
+            """;
+
+        var diagnostics = await AnalyzerRunner.GetDiagnosticsAsync(source);
+
+        Assert.Empty(diagnostics);
+    }
+
+    [Fact]
+    public async Task AttributeUsedWithoutTypeArgument_NoDiagnostic()
+    {
+        var source = AttributeStub + """
+                                     public class Fruit { }
+                                     [RavenCollectionAssignedFrom]
+                                     public class Apple { }
+                                     """;
+
+        var diagnostics = await AnalyzerRunner.GetDiagnosticsAsync(source);
+
+        Assert.Empty(diagnostics);
+    }
+
     // -----------------------------------------------------------------------
     // Error cases
     // -----------------------------------------------------------------------
@@ -120,8 +148,8 @@ public class RavenCollectionAssignedFromAnalyzerTests
         var diag = Assert.Single(diagnostics);
         Assert.Equal(RavenCollectionAssignedFromAnalyzer.DiagnosticId, diag.Id);
         Assert.Equal(DiagnosticSeverity.Error, diag.Severity);
-        Assert.Contains("Car", diag.GetMessage());
-        Assert.Contains("Fruit", diag.GetMessage());
+        Assert.Contains("'Car' is decorated", diag.GetMessage());
+        Assert.Contains("does not inherit from 'Fruit'", diag.GetMessage());
     }
 
     [Fact]
@@ -143,8 +171,8 @@ public class RavenCollectionAssignedFromAnalyzerTests
             Assert.Equal(RavenCollectionAssignedFromAnalyzer.DiagnosticId, d.Id);
             Assert.Equal(DiagnosticSeverity.Error, d.Severity);
         });
-        Assert.Contains(diagnostics, d => d.GetMessage().Contains("Apple"));
-        Assert.Contains(diagnostics, d => d.GetMessage().Contains("Grape"));
+        Assert.Contains(diagnostics, d => d.GetMessage().Contains("'Apple' is decorated"));
+        Assert.Contains(diagnostics, d => d.GetMessage().Contains("'Grape' is decorated"));
     }
 
     [Fact]
