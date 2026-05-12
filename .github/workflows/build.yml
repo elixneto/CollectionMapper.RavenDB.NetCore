@@ -20,12 +20,14 @@ jobs:
       with:
         dotnet-version: '10.x'
 
-    - name: Install SonarScanner
-      run: dotnet tool install --global dotnet-sonarscanner
+    - name: Install Tools
+      run: |
+        dotnet tool install --global dotnet-sonarscanner
+        dotnet tool install --global dotnet-reportgenerator-globaltool
 
     - name: SonarCloud Begin
       working-directory: ./src
-      run: dotnet sonarscanner begin /k:"elixneto_CollectionMapper.RavenDB.NetCore" /o:"elixnetogithub" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
+      run: dotnet sonarscanner begin /k:"elixneto_CollectionMapper.RavenDB.NetCore" /o:"elixnetogithub" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.cobertura.reportsPaths="coverage-report/Cobertura.xml"
 
     - name: Build
       working-directory: ./src
@@ -33,7 +35,14 @@ jobs:
 
     - name: Test with Coverage
       working-directory: ./src
-      run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./TestResults/coverage.opencover.xml
+      run: dotnet test --collect:"XPlat Code Coverage" --results-directory TestResults
+
+    - name: Merge Coverage Reports
+      working-directory: ./src
+      run: |
+        reportgenerator -reports:TestResults/**/coverage.cobertura.xml \
+                        -targetdir:coverage-report \
+                        -reporttypes:Cobertura
 
     - name: SonarCloud End
       working-directory: ./src

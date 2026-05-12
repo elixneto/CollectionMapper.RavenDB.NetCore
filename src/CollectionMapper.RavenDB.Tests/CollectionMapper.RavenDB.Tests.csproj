@@ -8,6 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="coverlet.collector" Version="10.0.0">
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+          <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
         <PackageReference Include="xunit" Version="2.*" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.*">
@@ -18,7 +22,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\CollectionMapper.RavenDB\CollectionMapper.RavenDB.csproj" />
-        <Analyzer Include="..\CollectionMapper.RavenDB.Analyzers\bin\Debug\netstandard2.0\CollectionMapper.RavenDB.Analyzers.dll"/>
+        <Analyzer Include="..\CollectionMapper.RavenDB.Analyzers\bin\Debug\netstandard2.0\CollectionMapper.RavenDB.Analyzers.dll" />
     </ItemGroup>
 
 </Project>
