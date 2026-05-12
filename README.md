@@ -1,13 +1,13 @@
 <image width="150px" src="https://github.com/elixneto/CollectionMapper.RavenDB.NetCore/blob/master/src/CollectionMapper.RavenDB/logo.png" />
 
-# CollectionMapper.RavenDB
+# CollectionMapper.RavenDB.NetCore
 
 Map your C# types to custom RavenDB collection names — without touching `DocumentStore` configuration by hand for every entity.
 
 ## Installation
 
 ```
-dotnet add package CollectionMapper.RavenDB
+dotnet add package CollectionMapper.RavenDB.NetCore
 ```
 
 ## Quick start
