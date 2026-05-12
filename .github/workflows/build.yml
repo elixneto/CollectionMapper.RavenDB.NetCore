@@ -27,9 +27,11 @@ jobs:
       run: dotnet sonarscanner begin /k:"elixneto_CollectionMapper.RavenDB.NetCore" /o:"elixnetogithub" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
 
     - name: Build
+      working-directory: ./src
       run: dotnet build
 
     - name: Test with Coverage
+      working-directory: ./src
       run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./TestResults/coverage.opencover.xml
 
     - name: SonarCloud End
