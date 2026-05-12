@@ -83,6 +83,35 @@ public class RavenCollectionAssignedFromAnalyzerTests
         Assert.Empty(diagnostics);
     }
 
+    [Fact]
+    public async Task AttributeWithNullClass_NoDiagnostic()
+    {
+        // No stub — UndefinedAttribute is unknown to Roslyn → attr.AttributeClass is null
+        var source = """
+            [UndefinedAttribute]
+            public class Apple { }
+            """;
+
+        var diagnostics = await AnalyzerRunner.GetDiagnosticsAsync(source);
+
+        Assert.Empty(diagnostics);
+    }
+
+    [Fact]
+    public async Task AttributeUsedWithoutTypeArgument_NoDiagnostic()
+    {
+        // Attribute is defined but applied without <T> — TypeArguments.Length will not be 1
+        var source = AttributeStub + """
+            public class Fruit { }
+            [RavenCollectionAssignedFrom]
+            public class Apple { }
+            """;
+
+        var diagnostics = await AnalyzerRunner.GetDiagnosticsAsync(source);
+
+        Assert.Empty(diagnostics);
+    }
+
     // -----------------------------------------------------------------------
     // Error cases
     // -----------------------------------------------------------------------
