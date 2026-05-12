@@ -21,3 +21,11 @@ public class VehicleWithMotor : VehicleBase { }
 
 [RavenCollectionAssignedFrom<VehicleBase>]
 public class Car : VehicleWithMotor { }
+
+public class BananaCollectionMapper : RavenDBCollectionMapper
+{
+    public BananaCollectionMapper()
+    {
+        Map<Banana>("ScannedBananas");
+    }
+}
