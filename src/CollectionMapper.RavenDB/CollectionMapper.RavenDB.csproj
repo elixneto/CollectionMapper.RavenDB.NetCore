@@ -6,7 +6,7 @@
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         
         <!-- Package metadata -->
-        <Version>7.0.0</Version>
+        <Version>7.0.1</Version>
         <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
         <PackageId>CollectionMapper.RavenDB.NetCore</PackageId>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -28,10 +28,20 @@
     </ItemGroup>
 
     <ItemGroup>
-        <!-- Analyzer runs during compilation for all consumers of this library -->
+        <!-- Analyzer runs during compilation for all consumers of this library (P2P references) -->
         <ProjectReference Include="..\CollectionMapper.RavenDB.Analyzers\CollectionMapper.RavenDB.Analyzers.csproj"
                           OutputItemType="Analyzer"
                           ReferenceOutputAssembly="false"/>
     </ItemGroup>
+
+    <!-- Include the analyzer DLL in the NuGet package under the required path so it's loaded for NuGet consumers -->
+    <Target Name="IncludeAnalyzerInPackage" BeforeTargets="_GetPackageFiles">
+        <ItemGroup>
+            <None Include="..\CollectionMapper.RavenDB.Analyzers\bin\$(Configuration)\netstandard2.0\CollectionMapper.RavenDB.Analyzers.dll"
+                  Pack="true"
+                  PackagePath="analyzers/dotnet/cs"
+                  Visible="false"/>
+        </ItemGroup>
+    </Target>
 
 </Project>
