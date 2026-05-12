@@ -37,7 +37,7 @@ jobs:
 
     - name: Test with Coverage
       working-directory: ./src
-      run: dotnet test --collect:"XPlat Code Coverage" --results-directory TestResults
+      run: dotnet test CollectionMapper.RavenDB.Tests/CollectionMapper.RavenDB.Tests.csproj --collect:"XPlat Code Coverage" --results-directory TestResults
 
     - name: Merge Coverage Reports
       working-directory: ./src
