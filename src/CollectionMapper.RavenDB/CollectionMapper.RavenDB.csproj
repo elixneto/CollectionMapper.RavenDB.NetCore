@@ -6,7 +6,7 @@
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         
         <!-- Package metadata -->
-        <Version>7.0.0</Version>
+        <Version>7.0.1</Version>
         <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
         <PackageId>CollectionMapper.RavenDB.NetCore</PackageId>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
