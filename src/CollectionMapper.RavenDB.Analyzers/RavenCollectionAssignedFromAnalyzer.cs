@@ -37,17 +37,12 @@ public sealed class RavenCollectionAssignedFromAnalyzer : DiagnosticAnalyzer
 
         foreach (var attr in typeSymbol.GetAttributes())
         {
-            if (attr.AttributeClass is null)
+            if (attr.AttributeClass is null || attr.AttributeClass.Kind == SymbolKind.ErrorType)
             {
                 continue;
             }
             
             if (!IsAssignedFromAttribute(attr.AttributeClass))
-            {
-                continue;
-            }
-
-            if (attr.AttributeClass.TypeArguments.Length != 1)
             {
                 continue;
             }
