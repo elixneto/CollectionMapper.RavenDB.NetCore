@@ -1,7 +1,9 @@
-<image width="150px" src="https://github.com/elixneto/CollectionMapper.RavenDB.NetCore/blob/master/src/CollectionMapper.RavenDB/logo.png" />
+![Sonar Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=elixneto_CollectionMapper.RavenDB.NetCore&metric=alert_status)
+![Sonar Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=elixneto_CollectionMapper.RavenDB.NetCore&metric=vulnerabilities)
+![Sonar Coverage](https://sonarcloud.io/api/project_badges/measure?project=elixneto_CollectionMapper.RavenDB.NetCore&metric=coverage)
 
 # CollectionMapper.RavenDB.NetCore
-
+<image width="160px" src="https://github.com/elixneto/CollectionMapper.RavenDB.NetCore/blob/master/src/CollectionMapper.RavenDB/logo.png" />
 Map your C# types to custom RavenDB collection names — without touching `DocumentStore` configuration by hand for every entity.
 
 ## Installation
