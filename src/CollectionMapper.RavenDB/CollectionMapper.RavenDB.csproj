@@ -13,7 +13,8 @@
         <Authors>Élix Neto</Authors>
         <Company />
         <Product />
-        <Description>Collection Mapper for RavenDB</Description>
+        <Description>RavenDB Collection Assignment for Entities</Description>
+        <PackageTags>ravendb;mapper;collection;assignment</PackageTags>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/elixneto/CollectionMapper.RavenDB.NetCore</PackageProjectUrl>
         <RepositoryUrl>https://github.com/elixneto/CollectionMapper.RavenDB.NetCore</RepositoryUrl>
