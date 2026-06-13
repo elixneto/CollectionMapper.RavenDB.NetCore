@@ -7,7 +7,7 @@ public class RavenDBCollectionMapper
 {
     private readonly List<RavenDBCollectionDefinitionModel> _mappedCollections = [];
 
-    public IReadOnlyList<RavenDBCollectionDefinitionModel> MappedCollections => _mappedCollections;
+    public IReadOnlyList<RavenDBCollectionDefinitionModel> MappedCollections => _mappedCollections.AsReadOnly();
 
     public RavenDBCollectionMapper Map<T>(string collectionName) where T : class
     {
